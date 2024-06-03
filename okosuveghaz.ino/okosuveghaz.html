@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Okosüvegház</title>
+</head>
+<body class="bg-white">
+    <h1 class="text-center">Okosüvegház</h1>
+    <div class="container">
+        <!--<div class="row mx-auto p-5">
+            <div class="col-5 bg-warning mx-auto">Fűtés</div>
+            <div class="col-5 bg-info mx-auto">Víz</div>
+        </div>
+        <div class="row p-5">
+            <button type="button" class="col-2 ">Fűtés be</button>
+            <button type="button" class="col-2 ">Fűtés ki</button>
+            <span class="col-3"></span>
+            <button type="button" class="col-2 ">Víz be</button>
+            <button type="button" class="col-2 ">Víz ki</button>
+        </div>-->
+        <div class="input-group d-flex justify-content-between">
+            <span>
+                <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-thermometer-snow" viewBox="0 0 16 16">
+                    <path d="M5 12.5a1.5 1.5 0 1 1-2-1.415V9.5a.5.5 0 0 1 1 0v1.585A1.5 1.5 0 0 1 5 12.5"/>
+                    <path d="M1 2.5a2.5 2.5 0 0 1 5 0v7.55a3.5 3.5 0 1 1-5 0zM3.5 1A1.5 1.5 0 0 0 2 2.5v7.987l-.167.15a2.5 2.5 0 1 0 3.333 0L5 10.486V2.5A1.5 1.5 0 0 0 3.5 1m5 1a.5.5 0 0 1 .5.5v1.293l.646-.647a.5.5 0 0 1 .708.708L9 5.207v1.927l1.669-.963.495-1.85a.5.5 0 1 1 .966.26l-.237.882 1.12-.646a.5.5 0 0 1 .5.866l-1.12.646.884.237a.5.5 0 1 1-.26.966l-1.848-.495L9.5 8l1.669.963 1.849-.495a.5.5 0 1 1 .258.966l-.883.237 1.12.646a.5.5 0 0 1-.5.866l-1.12-.646.237.883a.5.5 0 1 1-.966.258L10.67 9.83 9 8.866v1.927l1.354 1.353a.5.5 0 0 1-.708.708L9 12.207V13.5a.5.5 0 0 1-1 0v-11a.5.5 0 0 1 .5-.5"/>
+                  </svg>Hűtés</span>
+                <button type="button" class="btn btn-outline-secondary" onclick="hutesKapcsolas(1);" class="hutesGombok">Be</button>
+                <button type="button" class="btn btn-outline-secondary" class="hutesGombok">Ki</button>
+            </span>
+            <span>
+                <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-water" viewBox="0 0 16 16">
+                    <path d="M.036 3.314a.5.5 0 0 1 .65-.278l1.757.703a1.5 1.5 0 0 0 1.114 0l1.014-.406a2.5 2.5 0 0 1 1.857 0l1.015.406a1.5 1.5 0 0 0 1.114 0l1.014-.406a2.5 2.5 0 0 1 1.857 0l1.015.406a1.5 1.5 0 0 0 1.114 0l1.757-.703a.5.5 0 1 1 .372.928l-1.758.703a2.5 2.5 0 0 1-1.857 0l-1.014-.406a1.5 1.5 0 0 0-1.114 0l-1.015.406a2.5 2.5 0 0 1-1.857 0l-1.014-.406a1.5 1.5 0 0 0-1.114 0l-1.015.406a2.5 2.5 0 0 1-1.857 0L.314 3.964a.5.5 0 0 1-.278-.65m0 3a.5.5 0 0 1 .65-.278l1.757.703a1.5 1.5 0 0 0 1.114 0l1.014-.406a2.5 2.5 0 0 1 1.857 0l1.015.406a1.5 1.5 0 0 0 1.114 0l1.014-.406a2.5 2.5 0 0 1 1.857 0l1.015.406a1.5 1.5 0 0 0 1.114 0l1.757-.703a.5.5 0 1 1 .372.928l-1.758.703a2.5 2.5 0 0 1-1.857 0l-1.014-.406a1.5 1.5 0 0 0-1.114 0l-1.015.406a2.5 2.5 0 0 1-1.857 0l-1.014-.406a1.5 1.5 0 0 0-1.114 0l-1.015.406a2.5 2.5 0 0 1-1.857 0L.314 6.964a.5.5 0 0 1-.278-.65m0 3a.5.5 0 0 1 .65-.278l1.757.703a1.5 1.5 0 0 0 1.114 0l1.014-.406a2.5 2.5 0 0 1 1.857 0l1.015.406a1.5 1.5 0 0 0 1.114 0l1.014-.406a2.5 2.5 0 0 1 1.857 0l1.015.406a1.5 1.5 0 0 0 1.114 0l1.757-.703a.5.5 0 1 1 .372.928l-1.758.703a2.5 2.5 0 0 1-1.857 0l-1.014-.406a1.5 1.5 0 0 0-1.114 0l-1.015.406a2.5 2.5 0 0 1-1.857 0l-1.014-.406a1.5 1.5 0 0 0-1.114 0l-1.015.406a2.5 2.5 0 0 1-1.857 0L.314 9.964a.5.5 0 0 1-.278-.65m0 3a.5.5 0 0 1 .65-.278l1.757.703a1.5 1.5 0 0 0 1.114 0l1.014-.406a2.5 2.5 0 0 1 1.857 0l1.015.406a1.5 1.5 0 0 0 1.114 0l1.014-.406a2.5 2.5 0 0 1 1.857 0l1.015.406a1.5 1.5 0 0 0 1.114 0l1.757-.703a.5.5 0 1 1 .372.928l-1.758.703a2.5 2.5 0 0 1-1.857 0l-1.014-.406a1.5 1.5 0 0 0-1.114 0l-1.015.406a2.5 2.5 0 0 1-1.857 0l-1.014-.406a1.5 1.5 0 0 0-1.114 0l-1.015.406a2.5 2.5 0 0 1-1.857 0l-1.757-.703a.5.5 0 0 1-.278-.65"/>
+                  </svg>Öntözés</span>
+                <button type="button" class="btn btn-outline-secondary">Önt</button>
+                <button type="button" class="btn btn-outline-secondary">Leállít</button>
+            </span>
+            
+        </div>
+        <!--<div class="input-group d-flex justify-content-end">
+            <span class="input-group-text">Öntözés</span>
+            <button type="button" class="btn btn-outline-secondary">Önt</button>
+            <button type="button" class="btn btn-outline-secondary">Leállít</button>
+        </div>-->
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-10">
+            <table class="table table-bordered border-dark table-striped table-success mt-5 p-3">
+                <thead>
+                <tr>
+                    <td>#</td>
+                    <td>Hőmérséklet</td>
+                    <td>Páratartalom</td>
+                    <td>Rögzítési idő</td>
+                </tr>
+                </thead>
+                <tr>
+                    <td>1</td>
+                    <td>27°C</td>
+                    <td>60%</td>
+                    <td>2024.05.18 15:03:47</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>34°C</td>
+                    <td>48%</td>
+                    <td>2024.05.18 15:08:51</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>29°C</td>
+                    <td>51%</td>
+                    <td>2024.05.18 15:13:53</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>37°C</td>
+                    <td>29%</td>
+                    <td>2024.05.18 15:18:55</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+        
+    <ul class="pagination justify-content-center mt-3">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
+
+
+    <footer class="bg-dark fixed-bottom text-white text-center">@ 2024</footer>
+
+    <script>
+
+        function hutesKapcsolas(allapot){
+            $(".hutesGombok").attr("diabled",true);
+            $.ajax({
+                url: "/api/kuldes/huteskapcsolas",
+                method: "POST",
+                data: {allapot:allapot},
+                async:false,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                beforeSend: function(){
+                    //Mi történjen addig amíg nem kapok választ 
+                },
+                success:function(){
+                    //Mi történjen ha kaptam választ
+                    $(".hutesGombok").attr("diabled",false);
+                }
+
+            });
+        }
+
+    </script>
+</body>
+</html>

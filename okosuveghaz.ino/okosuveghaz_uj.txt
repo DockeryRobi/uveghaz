@@ -1,0 +1,136 @@
+#include <ESP8266WiFi.h>
+#include <ESP8266HTTPClient.h>
+
+//nem kell?
+#define ssid "Cisco3"
+#define password "Eotvos2023"
+//
+//DHCP? :(
+IPAddress subnet(255,255,0,0);
+IPAddress gateway(192,168,1,95);
+IPAddress local_IP(192,168,12,20); //20 helyére amit mondtam
+IPAddress dns1(8,8,8,8);
+IPAddress dns2(192,168,100,150);
+HTTPClient httpClient;
+WiFiClient client;
+
+#include "DHT.h"
+#define DHTPIN 4
+#define DHTTYPE DHT12
+
+DHT dht(DHTPIN,DHTTYPE);
+
+int led = 3;
+
+
+//int rele = ?;
+//const int pump = 9; //tinkercad
+
+int max; //max
+int cur; //aktuális
+
+int motor = 9;
+int fan = 10;
+//#define AOUT_PIN A0;
+
+//int val;
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(115200);
+  dht.begin();
+
+  if(WiFi.config(local_IP,gateway,subnet,dns1,dns2)){
+    Serial.println("Statikus IP konfigurálva");
+  }else{
+    Serial.println("Statikus IP SIKERTELEN!!!");
+  }
+
+  WiFi.begin(ssid,password);
+  Serial.print("Csatlakozás....");
+  while(WiFi.status() != WL_CONNECTED){
+    Serial.print(".");
+    delay(500);
+  }
+
+  Serial.println("");
+  Serial.println("Wifi kapcsolodas Sikeres!");
+  Serial.println(WiFi.localIP());
+
+
+  /*pinMode(pump, OUTPUT);
+  pinMode(rele, OUTPUT);*/
+  //pinMode(fan, OUTPUT);
+
+  pinMode(motor, OUTPUT);
+  pinMode(fan, OUTPUT);
+  pinMode(led, OUTPUT);
+  pinMode(A0, INPUT);
+  max = analogRead(A0); //?
+  Serial.println(max); //?
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  delay(5000);
+  cur = analogRead(A0);
+  Serial.println(cur);
+  float h = dht.readHumidity();
+  float tc = dht.readTemperature();
+  float tf = dht.readTemperature(true); //nem szükséges
+  if (isnan(h) || isnan(tc) || isnan(tf)){
+    Serial.println("Nem tudok mérni,");
+  } else {
+    Serial.print("Páratartalom: ");
+    Serial.print(h);
+    Serial.print("%");
+    Serial.print(" || ");
+    Serial.print("Hőmérséklet: ");
+    Serial.print(tc);
+    Serial.print("C / ");
+    /*Serial.print(tf);
+    Serial.println("F");*/
+  }
+
+  //vizipumpa - cur(aktuális nedvesség) alapján felkapcsol - pumpa logikai(állapot)
+  if(){
+    
+  }
+
+  //!ventillátor - led && ventillátor - !led - ventillátor logikai(állapot)
+  if(){
+
+  }
+}
+
+void adatkuldes(float h, float tc, int cur, ){
+  const char *URL = "http://192.168.21.158/pelda/okosuveghaz/api/iranyit/beszuras";
+  String data = "h="+String(h)+"&tc="+String(tc)+"cur="+String(cur)+;
+  httpClient.begin(client,URL);
+  httpClient.addHeader("Content-Type","application/x-www-form-urlencoded");
+  httpClient.POST(data);
+  String content = httpClient.getString();
+  httpClient.end();
+  Serial.print("RESPONSE: ");
+  Serial.println(content);
+
+}
+/*
+void probafan(){
+  // Check if there is any incoming data
+  if(Serial.available() > 0) {
+    // Read the incoming data
+    char command = Serial.read();
+    
+    // Check the received command
+    if(command == '1') {
+      // Turn on the fan
+      digitalWrite(fanPin, HIGH);
+      Serial.println("Fan turned on");
+    } else if(command == '0') {
+      // Turn off the fan
+      digitalWrite(fanPin, LOW);
+      Serial.println("Fan turned off");
+    }
+  }
+}*/

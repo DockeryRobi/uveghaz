@@ -1,0 +1,117 @@
+fooldal.blade:
+<b
+
+h1 Okosüvegház
+
+form action="{{ route('iranyit') }} method="post" [onclick="nev()"]
+	@csrf
+	button type="submit">Hűtés</button>
+
+	button type="submit">Öntés</button>
+</form
+
+
+<div class="table-responsive">
+        <table class="table table-primary table-striped table-hover">
+            <tr>
+                <th>Id</th>
+                <th>Hőmérséklet</th>
+                <th>Páratartalom</th>
+		        <th>Talaj nedvessége</th>
+                <th>Mérés ideje</th>
+            </tr>
+            @foreach ($homersekletek as $hom)
+                <tr>
+                    <td>{{ $hom->h_id }}</td>
+                    <td>{{ $hom->hofok }}&deg;C</td>
+                    <td>{{ $hom->paratartalom }}%</td>
+		            <td>{{ $hom->tn }}%</td>
+                    <td>{{ $hom->meres_ideje }}</td>
+                </tr> 
+            @endforeach
+            
+        </table>
+
+        {{ $homersekletek->links() }}
+    </div> 
+
+</b
+
+
+web.php
+
+use ... \iranyitasController;
+
+Route::get('/fooldal', [iranyitasController::class, 'index'])->name('homerseklet'); //name nem kell?
+Route::get('/iranyit', [iranyitasController::class, 'control']); //iranyit helyette?
+
+iranyitasController:
+
+use App\Models\Homerseklet;
+use Illuminate\Support\Facades\Validator;
+use GuzzleHttp\Client;
+
+index(){
+	$homersekletek = Homerseklet::orderBy('h_id','DESC')->paginate(10);
+	return view('fooldal')
+}
+create(Request $req){
+	(?validalas:
+	    $validalas = Validator::make(
+            $req->all(),
+            [
+                "homerseklet" => "required",
+                "paratartalom" => "required",
+		        "tn" => "required"
+            ],
+            [
+                "homerseklet.required" => "Hiányzó hőmérséklet",
+                "paratartalom.required" => "Hiányzó páratartalom",
+		        "tn.required" => "Hiányzó talajnedvesség"
+            ]
+        );
+
+        if($validalas->fails()){
+            $data['message'] = "Hibás adatok";  
+            $data['errorList'] = $validalas->messages();
+            return response()->json($data,400);
+        }else{
+	    $homerseklet = new Homerseklet;
+        $homerseklet->hofok = $req->input('homerseklet');
+        $homerseklet->paratartalom = $req->input('paratartalom');
+	    $homerseklet->tn = $req->input('talajnedvesseg');
+        $homerseklet->meres_ideje = date('Y-m-d H:i:s');
+        $homerseklet->save();
+        return response()->json($homerseklet,201);
+	}
+
+
+public function iranyit()
+	$client = new Client();
+	$response = $client->request('GET', 'http://arduinoipaddress/iranyit/beszuras');
+	return response()->json(['status' => 'success']);
+
+
+Homerseklet.php(model)
+
+    use HasFactory;
+    public $table = "uveghaz";(?homersekletek)
+    public $primaryKey = "h_id";
+    public $timestamps = false;
+    public $guarded = [];
+
+create_uveghazak(?homersekletek)
+
+Schema::create('homersekletek'(uveghazak), function (Blueprint $table) {
+            $table->id("h_id");
+            $table->float('hofok',4,2);
+            $table->integer('paratartalom');
+	        $table->integer('tn');
+            $table->dateTime('meres_ideje');
+        });
+
+
+
+api.php(?)
+Route::post("/fooldal/beszuras",[HomersekletController::class,'control']);
+//Route::post("/iranyit/beszuras",[HomersekletController::class,'_']); lehet nem kell mert controllerben küld
