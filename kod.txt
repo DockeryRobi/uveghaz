@@ -1,0 +1,105 @@
+--php artisan serve-- ?
+--php artisan optimize-- ?
+
+.env: ki kell szedni megjegyzésből
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=uveghaz
+DB_USERNAME=root
+DB_PASSWORD=
+
+<div class="table-responsive">
+        <table class="table table-bordered border-dark table-success table-striped table-hover">
+            <tr>
+                <th>Id</th>
+                <th>Hőmérséklet</th>
+                <th>Páratartalom</th>
+                <th>Talajnedvessége</th>
+                <th>Mérés ideje</th>
+            </tr>
+            @foreach ($uveghazak as $uve)
+                <tr>
+                    <td>{{ $uve->h_id }}</td>
+                    <td>{{ $uve->hofok }}&deg;C</td>
+                    <td>{{ $uve->paratartalom }}%</td>
+                    <td>{{ $uve->tn }} mm</td>
+                    <td>{{ $uve->meres_ideje }}</td>
+                </tr> 
+            @endforeach
+            
+        </table>
+
+        {{ $homersekletek->links() }}
+    </div> 
+
+    <div class="col-10">
+        @yield('content')
+    </div>
+
+
+    $.ajax: 
+    beforesend function()
+    $.blockUI({ ------neve egy adat
+        fadeIn : 0,
+        fadeOut : 0,
+        showOverlay : false
+    });
+
+    success function()
+    $.unblockUI();
+
+    hasznos lehet:
+    function torles(h_id){
+            $.ajax({
+                url:"./teremtorles",
+                type: "POST",
+                cache: false,
+                async:false,
+                data:{"h_id":h_id},
+                headers: { // Helyes fejlécnév
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                },
+                beforeSend:function(){
+                    $("#torlesGomb_"+h_id).attr("disable",true);
+                    $("#torlesGomb_"+h_id).addClass("bg-dark");
+                    $("#torlesGomb_"+h_id).html("Folyamatban...");
+                },
+                success:function(data){
+                    if(data.error ==false){
+                        $("#sor_"+h_id).remove();
+                    }else{
+                        $("#torlesGomb_"+h_id).attr("disable",false);
+                        $("#torlesGomb_"+h_id).html("Törlés");
+                    }
+
+                }
+
+            });
+        }
+
+    táblázatnál lehet:
+    @if ha túl meleg (30°C +) = piros háttér, túl vizes = kék, túl párás = szürke? DE indikátor a gomboknak
+
+    {{ $utolsoAdat->paratartalom }}<br>
+
+    @if ($utolsoAdat)
+        {{ $utolsoAdat->hofok }}</br>
+        {{ $utolsoAdat->paratartalom }}</br>
+        {{ $utolsoAdat->tn }}</br>
+    @endif
+     @if ($hofok > 30)
+                    class="bg-warning bg-gradient"
+                @endif
+                @if ($hofok < 20)
+                    class="bg-gradient" style="background-color: rgb(123, 61, 238)"
+                @endif
+                @if ($paratartalom > 60)
+                    class="bg-gradient" style="background-color: #ba549d"
+                @endif
+                @if ($paratartalom < 40)
+                    class="bg-info bg-gradient"
+                @endif
+
+Külön bladeben navbar?

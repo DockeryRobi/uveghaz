@@ -1,0 +1,145 @@
+//Részleges kódok
+VENTILLÁTOR
+
+Arduino
+// Define the pin for the fan
+int fanPin = 9;
+
+void setup() {
+  // Initialize the fan pin as an output
+  pinMode(fanPin, OUTPUT);
+  // Start serial communication
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Check if there is any incoming data
+  if(Serial.available() > 0) {
+    // Read the incoming data
+    char command = Serial.read();
+    
+    // Check the received command
+    if(command == '1') {
+      // Turn on the fan
+      digitalWrite(fanPin, HIGH);
+      Serial.println("Fan turned on");
+    } else if(command == '0') {
+      // Turn off the fan
+      digitalWrite(fanPin, LOW);
+      Serial.println("Fan turned off");
+    }
+  }
+}
+
+cmd:
+composer require php-serial/php-serial
+
+controller:
+// app/Http/Controllers/FanController.php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use PHPSerial\Serial;
+use SerialException;
+
+class FanController extends Controller
+{
+    public function turnOn()
+    {
+        $serial = new Serial();
+        $port = '/dev/ttyACM0'; // Set the correct port for your Arduino
+        $serial->deviceSet($port);
+        $serial->confBaudRate(9600);
+        $serial->confParity("none");
+        $serial->confCharacterLength(8);
+        $serial->confStopBits(1);
+
+        $serial->deviceOpen();
+        $serial->sendMessage("1");
+
+        return redirect()->back();
+    }
+
+    public function turnOff()
+    {
+        $serial = new Serial();
+        $port = '/dev/ttyACM0'; // Set the correct port for your Arduino
+        $serial->deviceSet($port);
+        $serial->confBaudRate(9600);
+        $serial->confParity("none");
+        $serial->confCharacterLength(8);
+        $serial->confStopBits(1);
+
+        $serial->deviceOpen();
+        $serial->sendMessage("0");
+
+        return redirect()->back();
+    }
+}
+
+routeok:
+// routes/web.php
+
+use App\Http\Controllers\FanController;
+
+Route::get('/turn-on', [FanController::class, 'turnOn']);
+Route::get('/turn-off', [FanController::class, 'turnOff']);
+
+<!-- resources/views/welcome.blade.php -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Arduino Fan Control</title>
+</head>
+<body>
+    <form action="/turn-on" method="GET">
+        <button type="submit">Turn On Fan</button>
+    </form>
+    
+    <form action="/turn-off" method="GET">
+        <button type="submit">Turn Off Fan</button>
+    </form>
+</body>
+</html>
+
+VÍZPUMPA(MOTOR)
+
+Arduino:
+int pumpPin = 13;
+
+void setup() {
+  pinMode(pumpPin, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  if (Serial.available() > 0) {
+    char command = Serial.read();
+    if (command == '1') {
+      digitalWrite(pumpPin, HIGH);
+    } else if (command == '0') {
+      digitalWrite(pumpPin, LOW);
+    }
+  }
+}
+
+blade:
+<form method="post" action="{{ route('control.pump') }}">
+    @csrf
+    <button type="submit" name="command" value="1">Turn On Water Pump</button>
+    <button type="submit" name="command" value="0">Turn Off Water Pump</button>
+</form>
+
+Route:
+Route::post('/control-pump', function (Request $request) {
+    $command = $request->input('command');
+    $port = '/dev/ttyACM0'; // Change this to the appropriate port for your Arduino board
+    
+    $fp = fopen($port, 'w');
+    fwrite($fp, $command);
+    fclose($fp);
+    
+    return redirect()->back();
+})->name('control.pump');
