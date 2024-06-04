@@ -3,8 +3,8 @@
 #include <ESP8266HTTPClient.h>
 
 //nem kell?
-#define ssid "Cisco3"
-#define password "Eotvos2024"
+#define WIFI_SSID "Cisco3"
+#define WIFI_PASS "Eotvos2024"
 //
 
 //Fix ip beállítás
@@ -30,7 +30,7 @@ int led = D5;
 //#define nedves ? < 520
 //#define szaraz ? 1024
 
-int max; //max 1024
+//int max; //max 1024
 int sensorValue; //aktuális
 
 int motor = D7; //9
@@ -136,10 +136,18 @@ void loop() {
     /*Serial.print(tf);
     Serial.println("F");*/
   }
+  if(tc > 30){
+    delay(500);
+    digitalWrite(led, HIGH);
+  }
+  else{
+    delay(500);
+    digitalWrite(led, LOW);
+  }
 }
 
 void adatkuldes(float h, float tc, int sensorValue){
-  const char *URL = "http://192.168.12.19/okosuveghaz/api/kuldes/beszuras";
+  const char *URL = "http://192.168.21.20/okosuveghaz/public/kuldes"; //192.168.12.19
   String data = "h="+String(h)+"&tc="+String(tc)+"sensorValue="+String(sensorValue);
   httpClient.begin(client,URL);
   httpClient.addHeader("Content-Type","application/x-www-form-urlencoded");
