@@ -42,29 +42,33 @@ void notfoundPage(){
 
 void szellozesbekapcsolas(){
 	//Ide kell írni a ledkapcsolás kódját
-  digitalWrite(fan, HIGH);
-  webserver.send(200, "text/html", "ok"); 
+    delay(1000);
+    digitalWrite(fan, HIGH);
+    webserver.send(200, "text/html", "ok"); 
 
 }
 
 void szellozeslekapcsolas(){
 	//Ide kell írni a ledkapcsolás kódját
-  digitalWrite(fan, LOW);
-  webserver.send(200, "text/html", "nem ok"); 
+    delay(1000);
+    digitalWrite(fan, LOW);
+    webserver.send(200, "text/html", "nem ok"); 
 
 }
 
 void ontesbekapcsolas(){
 	//Ide kell írni a ledkapcsolás kódját
-  digitalWrite(motor, LOW);
-webserver.send(200, "text/html", "ok"); 
+    delay(1000);
+    digitalWrite(motor, LOW);
+    webserver.send(200, "text/html", "ok"); 
 
 }
 
 void onteslekapcsolas(){
 	//Ide kell írni a ledkapcsolás kódját
-  digitalWrite(motor, LOW);
-webserver.send(200, "text/html", "nem ok"); 
+    delay(1000);
+    digitalWrite(motor, LOW);
+    webserver.send(200, "text/html", "nem ok"); 
 
 }
 
