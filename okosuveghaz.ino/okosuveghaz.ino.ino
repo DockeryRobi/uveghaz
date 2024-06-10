@@ -21,7 +21,7 @@ WiFiClient client;
 
 #include "DHT.h"
 #define DHTPIN 4
-#define DHTTYPE DHT12
+#define DHTTYPE DHT12 //22
 
 DHT dht(DHTPIN,DHTTYPE);
 
