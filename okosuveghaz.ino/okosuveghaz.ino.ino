@@ -153,7 +153,7 @@ void loop() {
 }
 
 void adatkuldes(float h, float tc, int sensorValue){
-  const char *URL = "http://192.168.21.20/uveghaz/public/api/kuldes"; //ip cím ahova küldi az adatot
+  const char *URL = "http://192.168.21.20/uveghaz/public/api/kuldes"; //ip cím ahova küldi az adatot - gép címe
   String data = "paratartalom="+String(h)+"&homerseklet="+String(tc)+"&tn="+String(sensorValue);
   httpClient.begin(client,URL);
   httpClient.addHeader("Content-Type","application/x-www-form-urlencoded");
