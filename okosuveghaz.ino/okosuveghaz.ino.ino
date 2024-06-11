@@ -151,8 +151,8 @@ void loop() {
 }
 
 void adatkuldes(float h, float tc, int sensorValue){
-  const char *URL = "http://192.168.21.20/okosuveghaz/public/kuldes"; //192.168.12.19
-  String data = "h="+String(h)+"&tc="+String(tc)+"sensorValue="+String(sensorValue);
+  const char *URL = "http://192.168.21.20/uveghaz/public/api/kuldes"; //192.168.12.19
+  String data = "paratartalom="+String(h)+"&homerseklet="+String(tc)+"&tn="+String(sensorValue);
   httpClient.begin(client,URL);
   httpClient.addHeader("Content-Type","application/x-www-form-urlencoded");
   httpClient.POST(data);
