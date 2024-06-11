@@ -103,3 +103,7 @@ DB_PASSWORD=
                 @endif
 
 Külön bladeben navbar?
+@extends('layouts') -> ha van masik blade is:
+@section('content')
+welcome.blade tartalma
+@endsection
