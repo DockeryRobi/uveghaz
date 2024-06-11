@@ -12,7 +12,7 @@ Route::get('/user', function (Request $request) {
 Route::post('/kuldes/szellozeskapcsolas',[UveghazController::class,'szellozes']); //->name()
 Route::post('/kuldes/onteskapcsolas',[UveghazController::class,'ontes']);
 
-
+Route::post('/kuldes',[UveghazController::class,'tarol'])->name('uveghaz');
 
 
 
