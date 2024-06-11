@@ -5,5 +5,5 @@ use App\Http\Controllers\UveghazController;
 
 Route::get('/', [UveghazController::class,'index']);
 
-Route::post('/kuldes',[UveghazController::class,'tarol'])->name('uveghaz');
+
 
