@@ -107,3 +107,5 @@ Külön bladeben navbar?
 @section('content')
 welcome.blade tartalma
 @endsection
+
+<!--<div class="text-center"></div>-->{{ $uveghazak->links() }}
