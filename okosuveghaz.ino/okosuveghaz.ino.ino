@@ -164,22 +164,3 @@ void adatkuldes(float h, float tc, int sensorValue){
   Serial.println(content);
 
 }
-/*
-void probafan(){
-  // Check if there is any incoming data
-  if(Serial.available() > 0) {
-    // Read the incoming data
-    char command = Serial.read();
-    
-    // Check the received command
-    if(command == '1') {
-      // Turn on the fan
-      digitalWrite(fanPin, HIGH);
-      Serial.println("Fan turned on");
-    } else if(command == '0') {
-      // Turn off the fan
-      digitalWrite(fanPin, LOW);
-      Serial.println("Fan turned off");
-    }
-  }
-}*/
