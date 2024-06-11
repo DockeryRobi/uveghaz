@@ -148,6 +148,8 @@ void loop() {
     delay(500);
     digitalWrite(led, LOW);
   }
+
+    //adatkuldes(h, tc, sensorValue); //Kell?
 }
 
 void adatkuldes(float h, float tc, int sensorValue){
