@@ -103,6 +103,18 @@ DB_PASSWORD=
                 @endif
 
 Külön bladeben navbar?
+
+suliból újra, mert elfelejtettem:
+@section('title', "Főoldal")
+@section('content')
+@session('content')
+    
+@endsession
+
+
+@endsection
+
+
 @extends('layouts.(blade neve)') -> ha van masik blade is:
 @section('content')
 welcome.blade tartalma
