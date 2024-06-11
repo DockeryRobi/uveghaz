@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('uveghazak', function (Blueprint $table) {
             $table->id("h_id");
             $table->float('homerseklet',4,2);
-            $table->integer('paratartalom');
+            $table->integer('paratartalom'); //float('paratartalom')
             $table->integer('tn');
             $table->dateTime('meres_ideje');
         });
