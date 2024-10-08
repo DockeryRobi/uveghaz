@@ -121,3 +121,30 @@ welcome.blade tartalma
 @endsection
 
 <!--<div class="text-center"></div>-->{{ $uveghazak->links() }}
+
+                    @if ($utolsoAdat)
+                        {{ $utolsoAdat[0]['homerseklet'] }}, 
+                        {{ $utolsoAdat[0]['paratartalom'] }}, 
+                        {{ $utolsoAdat[0]['tn'] }} <br>
+                        {{ $utolsoAdat[0]['meres_ideje'] }}
+                    @endif
+(sass cssben saját színek - chatgpt)
+                    @if ($uve->homerseklet < 20)
+                                class="bg-gradient" style="background-color: rgb(123, 61, 238)"
+                            @endif
+                            @if ($uve->homerseklet > 30)
+                                class=" bg-warning bg-gradient"
+                            @endif
+                            @if ($uve->paratartalom < 40)
+                                class="bg-info bg-gradient" 
+                            @endif
+                            @if ($uve->paratartalom > 60)
+                                class="bg-gradient" style="background-color: #ba549d"
+                                
+                            @endif
+
+                            @class([
+    'class1' => $condition1,
+    'class2' => $condition2,
+    'class3' => $condition3
+])

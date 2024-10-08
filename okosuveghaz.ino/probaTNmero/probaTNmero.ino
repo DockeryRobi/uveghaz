@@ -1,37 +1,25 @@
+// Talajnedvesség érzékelő analóg bemeneti pinje
+#define SENSOR_PIN A0
 
-//int szaraz = 1024;
-//int wet = >500
+// Analóg bemeneti értékekhez tartozó száraz és nedves kalibrációs értékek
+#define DRY_VALUE 1024   // Száraz talajhoz tartozó analóg érték
+#define WET_VALUE 562      // Nedves talajhoz tartozó analóg érték
 
 void setup() {
-  // put your setup code here, to run once:
-  Serial.begin(9600);
-  
-/*
-  if(WiFi.config(local_IP,gateway,subnet,dns1,dns2)){
-    Serial.println("Statikus IP konfigurálva");
-  }else{
-    Serial.println("Statikus IP SIKERTELEN!!!");
-  }
-
-  WiFi.begin(ssid,password);
-  Serial.print("Csatlakozás....");
-  while(WiFi.status() != WL_CONNECTED){
-    Serial.print(".");
-    delay(500);
-  }
-
-  Serial.println("");
-  Serial.println("Wifi kapcsolodas Sikeres!");
-  Serial.println(WiFi.localIP());
-*/
-
-  pinMode(A0, INPUT);
-  
+  Serial.begin(9600); // Soros kommunikáció indítása 9600 baud sebességgel
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  int sensor = analogRead(A0); //?
-  Serial.println(sensor); //?
-  delay(500);
+  // Talajnedvesség olvasása
+  int sensorValue = analogRead(SENSOR_PIN);
+
+  // Talajnedvesség értékének százalékká alakítása
+  int moisturePercent = map(sensorValue, DRY_VALUE, WET_VALUE, 0, 100);
+
+  // Az értékek megjelenítése a Serial monitoron
+  Serial.print("Talajnedvesség: ");
+  Serial.print(moisturePercent);
+  Serial.println("%");
+
+  delay(1000); // 1 másodperc várakozás a következő mérés előtt
 }

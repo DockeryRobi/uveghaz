@@ -1,4 +1,4 @@
-int motor = D8;
+int motor = 4;
 
 void setup() {
   // put your setup code here, to run once:

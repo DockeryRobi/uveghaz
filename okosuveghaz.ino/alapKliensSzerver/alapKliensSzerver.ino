@@ -4,7 +4,7 @@
 
 // Set WiFi credentials
 #define WIFI_SSID "Cisco3"
-#define WIFI_PASS "Eotvos2024"
+#define WIFI_PASS "Eotvos2023"
 
 //Fix ip beállítás
 IPAddress subnet(255, 255, 0, 0);       // Subnet Mask
@@ -77,7 +77,7 @@ void loop(void){
 
 void adatKuldesPelda(float data1, int data2){
   String data = "data1="+String(data1)+"&data2="+String(data2);
-  const char *URL = "http://192.168.12.19/";
+  const char *URL = "";
   httpClient.begin(client,URL);
   httpClient.addHeader("Content-Type","application/x-www-form-urlencoded");
   httpClient.POST(data);

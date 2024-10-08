@@ -28,25 +28,25 @@
                 <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-wind" viewBox="0 0 16 16">
                     <path d="M12.5 2A2.5 2.5 0 0 0 10 4.5a.5.5 0 0 1-1 0A3.5 3.5 0 1 1 12.5 8H.5a.5.5 0 0 1 0-1h12a2.5 2.5 0 0 0 0-5m-7 1a1 1 0 0 0-1 1 .5.5 0 0 1-1 0 2 2 0 1 1 2 2h-5a.5.5 0 0 1 0-1h5a1 1 0 0 0 0-2M0 9.5A.5.5 0 0 1 .5 9h10.042a3 3 0 1 1-3 3 .5.5 0 0 1 1 0 2 2 0 1 0 2-2H.5a.5.5 0 0 1-.5-.5"/>
                   </svg>Szellőzés</span>
-                  
+                  @csrf
                 <button type="button" class="btn btn-outline-secondary" onclick="szellozesKapcsolas(1);" class="szellozesGombok">Be</button>
-                <button type="button" class="btn btn-outline-secondary szellozesGombok">Ki</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="szellozesKapcsolas(0);" class="szellozesGombok">Ki</button>
             </span>
             <span>
                 <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-water" viewBox="0 0 16 16">
                     <path d="M.036 3.314a.5.5 0 0 1 .65-.278l1.757.703a1.5 1.5 0 0 0 1.114 0l1.014-.406a2.5 2.5 0 0 1 1.857 0l1.015.406a1.5 1.5 0 0 0 1.114 0l1.014-.406a2.5 2.5 0 0 1 1.857 0l1.015.406a1.5 1.5 0 0 0 1.114 0l1.757-.703a.5.5 0 1 1 .372.928l-1.758.703a2.5 2.5 0 0 1-1.857 0l-1.014-.406a1.5 1.5 0 0 0-1.114 0l-1.015.406a2.5 2.5 0 0 1-1.857 0l-1.014-.406a1.5 1.5 0 0 0-1.114 0l-1.015.406a2.5 2.5 0 0 1-1.857 0L.314 3.964a.5.5 0 0 1-.278-.65m0 3a.5.5 0 0 1 .65-.278l1.757.703a1.5 1.5 0 0 0 1.114 0l1.014-.406a2.5 2.5 0 0 1 1.857 0l1.015.406a1.5 1.5 0 0 0 1.114 0l1.014-.406a2.5 2.5 0 0 1 1.857 0l1.015.406a1.5 1.5 0 0 0 1.114 0l1.757-.703a.5.5 0 1 1 .372.928l-1.758.703a2.5 2.5 0 0 1-1.857 0l-1.014-.406a1.5 1.5 0 0 0-1.114 0l-1.015.406a2.5 2.5 0 0 1-1.857 0l-1.014-.406a1.5 1.5 0 0 0-1.114 0l-1.015.406a2.5 2.5 0 0 1-1.857 0L.314 6.964a.5.5 0 0 1-.278-.65m0 3a.5.5 0 0 1 .65-.278l1.757.703a1.5 1.5 0 0 0 1.114 0l1.014-.406a2.5 2.5 0 0 1 1.857 0l1.015.406a1.5 1.5 0 0 0 1.114 0l1.014-.406a2.5 2.5 0 0 1 1.857 0l1.015.406a1.5 1.5 0 0 0 1.114 0l1.757-.703a.5.5 0 1 1 .372.928l-1.758.703a2.5 2.5 0 0 1-1.857 0l-1.014-.406a1.5 1.5 0 0 0-1.114 0l-1.015.406a2.5 2.5 0 0 1-1.857 0l-1.014-.406a1.5 1.5 0 0 0-1.114 0l-1.015.406a2.5 2.5 0 0 1-1.857 0L.314 9.964a.5.5 0 0 1-.278-.65m0 3a.5.5 0 0 1 .65-.278l1.757.703a1.5 1.5 0 0 0 1.114 0l1.014-.406a2.5 2.5 0 0 1 1.857 0l1.015.406a1.5 1.5 0 0 0 1.114 0l1.014-.406a2.5 2.5 0 0 1 1.857 0l1.015.406a1.5 1.5 0 0 0 1.114 0l1.757-.703a.5.5 0 1 1 .372.928l-1.758.703a2.5 2.5 0 0 1-1.857 0l-1.014-.406a1.5 1.5 0 0 0-1.114 0l-1.015.406a2.5 2.5 0 0 1-1.857 0l-1.014-.406a1.5 1.5 0 0 0-1.114 0l-1.015.406a2.5 2.5 0 0 1-1.857 0l-1.757-.703a.5.5 0 0 1-.278-.65"/>
                   </svg>Öntözés</span>
-                  
+                  @csrf
                 <button type="button" class="btn btn-outline-secondary" onclick="onteskapcsolas(1);" class="ontesGombok">Önt</button>
-                <button type="button" class="btn btn-outline-secondary ontesGombok">Leállít</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="onteskapcsolas(0);" class="ontesGombok">Leállít</button>
             </span>
             <div class="col-auto bg-success text-center border border-3 border-dark border-radius rounded p-3 mb-5">
                 <h2>Utolsó Adat:</h2>
                 <p>
                     @if ($utolsoAdat)
-                        {{ $utolsoAdat[0]['homerseklet'] }}, 
-                        {{ $utolsoAdat[0]['paratartalom'] }}, 
-                        {{ $utolsoAdat[0]['tn'] }} <br>
+                        {{ $utolsoAdat[0]['homerseklet'] }}&deg;C, 
+                        {{ $utolsoAdat[0]['paratartalom'] }}%, 
+                        {{ $utolsoAdat[0]['tn'] }}%<br>
                         {{ $utolsoAdat[0]['meres_ideje'] }}
                     @endif
                 </p>
@@ -57,7 +57,7 @@
         
     </div>
     
-    <div class="container">
+    <div class="container mt-4">
         <div class="row">
             <div class="col-12">
                 <div class="table-responsive">
@@ -70,25 +70,16 @@
                             <th>Mérés ideje</th>
                         </tr>
                         @foreach ($uveghazak as $uve)
-                            <tr
-                            @if ($uve->homerseklet < 20)
-                                class="bg-gradient" style="background-color: rgb(123, 61, 238)"
-                            @endif
-                            @if ($uve->homerseklet > 30)
-                                class=" bg-warning bg-gradient"
-                            @endif
-                            @if ($uve->paratartalom < 40)
-                                class="bg-info bg-gradient" 
-                            @endif
-                            @if ($uve->paratartalom > 60)
-                                class="bg-gradient" style="background-color: #ba549d"
-                                
-                            @endif
-                            >
+                            <tr @class([
+                                'bg-warning bg-gradient' => $uve->homerseklet > 30,
+                                'bg-gradient' => $uve->homerseklet < 20,
+                                'bg-info bg-gradient' => $uve->paratartalom < 40,
+                                'bg-gradient' => $uve->paratartalom > 60
+                            ])>
                                 <td>{{ $uve->h_id }}</td>
                                 <td>{{ $uve->homerseklet }}&deg;C</td>
                                 <td>{{ $uve->paratartalom }}%</td>
-                                <td>{{ $uve->tn }} mm</td>
+                                <td>{{ $uve->tn }}%</td>
                                 <td>{{ $uve->meres_ideje }}</td>
                             </tr> 
                         @endforeach
@@ -96,11 +87,12 @@
                 </div>
             </div>
         </div>
+        <div class="d-flex justify-content-center">{{ $uveghazak->links() }}</div>
     </div>
     
         
-        {{ $uveghazak->links() }}
-    </div> 
+        
+    <!--</div>--> 
 
     <footer class="bg-dark fixed-bottom text-white text-center">@ 2024</footer>
 

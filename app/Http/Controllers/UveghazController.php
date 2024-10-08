@@ -8,6 +8,10 @@ use App\Models\Uveghaz;
 
 class UveghazController extends Controller
 {
+    //arduino titkos - 192.168.139.51
+    
+    public $ip = "192.168.139.51"; //arduino ip cím
+    
     public function index(){
         $uveghazak = Uveghaz::orderBy('h_id','DESC')->paginate(10);
         $utolsoAdat = Uveghaz::orderBy('h_id','DESC')->limit(1)->get();
@@ -32,10 +36,10 @@ class UveghazController extends Controller
         );
     
         if($req->allapot == 1){
-            $curlHandle = curl_init('http://192.168.12.19/szellozesbekapcsolas'); //arduino kap ip cim
+            $curlHandle = curl_init('http://'.$this->ip.'/szellozesbekapcsolas'); //arduino kap ip cim
             
         }else{
-            $curlHandle = curl_init('http://192.168.12.19/szellozeslekapcsolas'); //arduino kap ip cim
+            $curlHandle = curl_init('http://'.$this->ip.'/szellozeslekapcsolas'); //arduino kap ip cim
         }
     
         //curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $Hparameter);
@@ -60,9 +64,9 @@ class UveghazController extends Controller
         );
 
         if ($req->allapot == 1) {
-            $curlHandle = curl_init('http://192.168.12.19/ontesbekapcsolas');
+            $curlHandle = curl_init('http://'.$this->ip.'/ontesbekapcsolas');
         }else{
-            $curlHandle = curl_init('http://192.168.12.19/onteslekapcsolas');
+            $curlHandle = curl_init('http://'.$this->ip.'/onteslekapcsolas');
         }
         
         curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);

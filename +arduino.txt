@@ -163,3 +163,76 @@ Route::post('/control-pump', function (Request $request) {
     
     return redirect()->back();
 })->name('control.pump');
+
+relé shield:
+(https://forum.arduino.cc/t/how-do-i-connect-12dc-minifan-with-relay/1139886)
+common on the relay goes to the fan positive
+no or nc on the relay goes to the power supply positive
+negative on the power supply goes to the fan negative
+
+N-MOSFET:
+To connect a 12V power supply with a fan and a Wemos D1 R1 using an N-MOSFET, you will need the following components:
+1. N-MOSFET (e.g. IRFZ44N)
+2. 12V power supply
+3. Fan
+4. Wemos D1 R1
+5. Breadboard and jumper wires
+
+Here is the circuit diagram:
+
+                      +12V
+                        |
+                        |
+                        | 
+                        +---------> Fan (12V)
+                        | 
+                        | 
+                     N-MOSFET
+                        |       
+                        ┣━━━━━━━━━━━━━━━━━━━> Wemos D1 R1 (GPIO Pin)
+                        |
+                        |
+                       GND
+
+Here is the code for controlling the fan using the Wemos D1 R1:
+
+#define FAN_PIN D1 // GPIO Pin connected to N-MOSFET
+
+void setup() {
+  pinMode(FAN_PIN, OUTPUT); // Set GPIO Pin connected to N-MOSFET as OUTPUT
+}
+
+void loop() {
+  // Turn the fan ON for 5 seconds
+  digitalWrite(FAN_PIN, HIGH);
+  delay(5000);
+  
+  // Turn the fan OFF for 5 seconds
+  digitalWrite(FAN_PIN, LOW);
+  delay(5000);
+}
+
+Make sure to replace `D1` with the actual GPIO Pin you used to connect the N-MOSFET in the code. Upload the code to the Wemos D1 R1 using the Arduino IDE or any other suitable software. Once uploaded, the code will turn the fan ON for 5 seconds and then turn it OFF for 5 seconds in a loop.
+
+video - MOSFET: https://www.youtube.com/watch?v=Pw1kSS_FIKk
+
+/*
+  //micro lehet pontosabb
+  if (millis() >= (previousTime)  ) {
+    previousTime = previousTime + 1000;  // + időzóna szerint
+    seconds++;
+    if (seconds == 60)
+    {
+    seconds = 0;
+    minutes++;
+    }
+    if (minutes == 60)
+    {
+    minutes = 0;
+    hours++;
+    }
+    if (hours == 24)
+    {
+    hours = 0;
+    }
+  */

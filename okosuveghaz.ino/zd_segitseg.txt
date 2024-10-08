@@ -1,0 +1,25 @@
+automatizálás: https://dataxogroup.com/az-automatizacio-jelentosege-a-folyamatosan-valtozo-vilagban/
+		https://mernokkapu.hu/milyen-tipusai-vannak-az-automatizalasi-rendszereknek/
+előny/hátrány: https://www.evsint.com/hu/disadvantages-and-advantages-of-robots-in-the-workplace/
+mindkettő: https://www.plc-program.hu/blog/az-automatizalas-elonyei-es-koltsegei
+
+vezérlés: https://tudasbazis.sulinet.hu/hu/szakkepzes/gepeszet/gepeszeti-szakismeretek-3/a-vezerlestechnika-alapjai/a-vezerles-mukodese
+onmukodo: https://tudasbazis.sulinet.hu/hu/szakkepzes/gepeszet/gepeszeti-szakismeretek-3/a-vezerlestechnika-alapjai/kezi-es-onmukodo-vezerles
+vezerles/vezerles: https://tudasbazis.sulinet.hu/hu/0d0cc85d-f7b5-41fb-aec0-d1b8362c7ebf_e90c4562-46d5-4b3a-a5ed-d640f67b512a_1632497a-4975-4feb-ba4d-1dd363000ff7_a210225a-9394-4434-8c57-7b327932371d_f69698b1-8739-4e2b-a28c-b6a71f9e23d0_a5894989-c6d7-4084-8db3-f432e8af18c7_708ab891-af8d-4b38-af6d-88569caa1097
+chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/http://zeus.nyf.hu/~elat/Automatika_I.pdf
+
+wikipedia: https://hu.wikipedia.org/wiki/Arduino
+
+eeprom: https://docs.arduino.cc/learn/built-in-libraries/eeprom/
+szoftver: https://electro.blog.hu/2017/12/24/mi_az_az_arduino
+
+laravel: https://kiszervezettmarketing.hu/weboldal-keszites/laravel/
+	https://webiskola.hu/php-ismeretek/a-legjobb-php-keretrendszerek/#laravel
+	https://github.com/szerveroldali/leirasok/blob/main/LaravelProjektszerkezet.md
+	https://laravel.com/docs/11.x/middleware#introduction
+	https://laravel.com/docs/11.x/session
+	https://www.pullrequest.com/blog/hardening-your-laravel-applications-tips-for-secure-session-and-cookie-management/
+	educative curl
+	cloudways mig
+
+led: harsanyireka.blog félvezető - led(dióda)
